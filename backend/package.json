@@ -1,0 +1,37 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+    "repository": {
+    "type": "git",
+    "url": "https://github.com/NatalyMaxi/todo-list.git"
+  },
+  "author": "Natalya",
+  "license": "ISC",
+    "bugs": {
+    "url": "https://github.com/NatalyMaxi/todo-list/issues"
+  },
+  "homepage": "https://github.com/NatalyMaxi/todo-list#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "celebrate": "^15.0.1",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.2",
+    "express-winston": "^4.2.0",
+    "helmet": "^6.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "sequelize": "^6.31.0",
+    "sqlite3": "^5.1.6",
+    "validator": "^13.7.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
