@@ -9,6 +9,7 @@ router.post('/signin', validationLogin, login); // проверяет прове
 router.use(auth); // защищает маршруты, которым нужны авторизация
 
 router.use('/', require('./users'));
+router.use('/tasks', require('./tasks'));
 
 
 router.use((req, res, next) => {
