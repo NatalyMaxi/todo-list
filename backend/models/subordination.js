@@ -4,11 +4,11 @@ const sequelize = new Sequelize({
    dialect: 'sqlite',
    storage: path.resolve(__dirname, '..', 'sqlite', 'myBasa.db')
 });
-
+const User = require('./user');
 class Subordination extends Model {
 }
 Subordination.init({
-   subordination_id: {
+   id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -37,5 +37,7 @@ Subordination.init({
       createdAt: false,
       updatedAt: false
    })
+
+Subordination.hasOne(User, { sourceKey: 'employee', foreignKey: 'user_id' });
 
 module.exports = Subordination;

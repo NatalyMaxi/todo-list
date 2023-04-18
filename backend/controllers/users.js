@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
+const { where } = require('sequelize');
 const User = require('../models/user');
+const Subordination = require('../models/subordination')
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-// Афторизация
+// Авторизация
 module.exports.login = (req, res, next) => {
    const { email, password } = req.body;
    return User.findOne({
@@ -29,7 +31,6 @@ module.exports.login = (req, res, next) => {
                surname: user.surname,
                role: user.role,
                email: user.email,
-               password: user.password
             });
       })
       .catch(next);
@@ -42,4 +43,22 @@ module.exports.getUsers = (req, res, next) => {
          res.send({ data: users });
       })
       .catch(next);
+};
+
+// Получаем всех сотрудников руководителя
+module.exports.getEmployee = (req, res, next) => {
+   const userId = req.body.user_id;
+   Subordination.findAll({
+      include: User,
+      where: {
+         director: userId
+      }
+   }).then((users) => {
+      console.log(123);
+      res.send({ data: users });
+   })
+      .catch((err) => {
+         console.log(err);
+         next(err)
+      });
 };

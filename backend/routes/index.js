@@ -4,7 +4,7 @@ const NotFoundError = require('../Error/NotFoundError');
 const { login } = require('../controllers/users');
 const { validationLogin } = require('../middlewares/validations');
 
-router.post('/signin', validationLogin, login); // проверяет проверяет переданные в теле почту и пароль и возвращает JWT
+router.post('/signin', validationLogin, login); 
 
 router.use(auth); // защищает маршруты, которым нужны авторизация
 

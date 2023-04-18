@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { validationCreateTask, validationUpdateTask } = require('../middlewares/validations');
 
 const {
    getTasks,
@@ -6,9 +7,8 @@ const {
    updateTask
 } = require('../controllers/tasks');
 
-
 router.get('/', getTasks);
-router.post('/', createTask);
-router.patch('/task', updateTask);
+router.post('/', validationCreateTask, createTask);
+router.patch('/task', validationUpdateTask, updateTask);
 
 module.exports = router;
