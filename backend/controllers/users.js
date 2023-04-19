@@ -4,7 +4,6 @@ const User = require('../models/user');
 const Subordination = require('../models/subordination')
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-// Авторизация
 module.exports.login = (req, res, next) => {
    const { email, password } = req.body;
    return User.findOne({
@@ -20,10 +19,6 @@ module.exports.login = (req, res, next) => {
             { expiresIn: '7d' },
          );
          res
-            .cookie('jwt', token, {
-               maxAge: 3600000 * 24 * 7,
-               httpOnly: true,
-            })
             .send({ // получаем объект пользователя
                user_id: user.user_id,
                name: user.name,
@@ -31,11 +26,11 @@ module.exports.login = (req, res, next) => {
                surname: user.surname,
                role: user.role,
                email: user.email,
+               token
             });
       })
       .catch(next);
 };
-
 // Получаем всех пользователей
 module.exports.getUsers = (req, res, next) => {
    User.findAll()
@@ -45,20 +40,24 @@ module.exports.getUsers = (req, res, next) => {
       .catch(next);
 };
 
-// Получаем всех сотрудников руководителя
 module.exports.getEmployee = (req, res, next) => {
-   const userId = req.body.user_id;
+
+   const userId = req.params.id;
    Subordination.findAll({
-      include: User,
+      include: [{
+         model: User,
+         as: 'emp',
+         attributes: ['user_id', 'name', 'patronymic', 'surname', 'role', 'email']
+      }],
       where: {
-         director: userId
+         director: userId,
       }
    }).then((users) => {
-      console.log(123);
-      res.send({ data: users });
+      res.send({ data: users.map(u=>u.emp) });
    })
       .catch((err) => {
          console.log(err);
          next(err)
       });
 };
+

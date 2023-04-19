@@ -38,6 +38,8 @@ Subordination.init({
       updatedAt: false
    })
 
-Subordination.hasOne(User, { sourceKey: 'employee', foreignKey: 'user_id' });
+// Subordination.hasOne(User, { sourceKey: 'employee', foreignKey: 'user_id' });
+Subordination.hasOne(User, { sourceKey: 'director', foreignKey: 'user_id', as: 'dir' });
+Subordination.hasOne(User, { sourceKey: 'employee', foreignKey: 'user_id', as: 'emp' });
 
 module.exports = Subordination;

@@ -6,6 +6,6 @@ const {
 } = require('../controllers/users');
 
 routes.get('/', getUsers);
-routes.get('/employee', getEmployee);
+routes.get('/employee/:id/subordination', getEmployee);
 
 module.exports = routes;

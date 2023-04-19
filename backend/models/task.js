@@ -71,4 +71,7 @@ Task.init({
       updatedAt: false
    })
 
+Task.hasOne(User, { sourceKey: 'director', foreignKey: 'user_id', as: 'dir' });
+Task.hasOne(User, { sourceKey: 'employee', foreignKey: 'user_id', as: 'emp' });
+
 module.exports = Task;

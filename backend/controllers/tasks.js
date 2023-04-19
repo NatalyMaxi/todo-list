@@ -1,9 +1,13 @@
 const Task = require('../models/task');
 const CastError = require('../Error/CastError');
-
+const User = require('../models/user');
 // GET получить все задачи
 module.exports.getTasks = (req, res, next) => {
-   Task.findAll() 
+   Task.findAll(
+      {
+         include: { all: true },
+      }
+   ) // не работает
       .then((tasks) => {
          res.send({ data: tasks });
       })
@@ -20,7 +24,7 @@ module.exports.createTask = async (req, res, next) => {
       dateCreation,
       dateUpdate,
       deadline,
-      employee
+      employee,
    } = req.body;
    const director = req.user.user_id;
    try {
@@ -59,22 +63,23 @@ module.exports.updateTask = async (req, res, next) => {
       employee,
       task_id
    } = req.body;
+   //const director = req.user.user_id;
    console.log(director,
       heading, description, priority, status, dateCreation, dateUpdate, deadline, employee,
-   )
+      )
    try {
       const task = await Task.update(
          {
-            heading,
-            description,
-            priority,
-            status,
-            dateCreation,
-            dateUpdate,
-            deadline,
-            director,
-            employee,
-            task_id
+               heading,
+               description,
+               priority,
+               status,
+               dateCreation,
+               dateUpdate,
+               deadline,
+               director,
+               employee,
+               task_id
          },
          {
             where: {
