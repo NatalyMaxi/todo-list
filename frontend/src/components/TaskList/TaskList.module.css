@@ -1,0 +1,33 @@
+.taskList {
+   width: 100%;
+   height: 100%;
+   margin: 0 auto;
+}
+
+.taskList__content {
+   display: flex;
+   flex-direction: column;
+   gap: 40px;
+   max-width: 1800px;
+   box-shadow: 0px 4px 20px rgba(30, 133, 98, 0.4);
+   border-radius: 40px;
+   margin: 40px auto;
+   padding: 20px 20px 40px;
+   box-sizing: border-box;
+}
+
+.taskList__grid {
+   display: grid;
+   width: 100%;
+   grid-template-columns: 1fr;
+   grid-template-rows: repeat(auto-fill, 50px);
+   column-gap: 10px;
+   row-gap: 10px;
+   margin: 0;
+}
+
+.taskList__wrapper {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}

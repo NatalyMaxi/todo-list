@@ -1,0 +1,15 @@
+.exitButton {
+   width: 32px;
+   height: 32px;
+   border: none;
+   background-color: rgba(255, 255, 255, 1);
+   padding: 7px;
+   background-image: url(../../images/icon-button-hover.png);
+   background-repeat: no-repeat;
+   background-position: center;
+   cursor: pointer;
+}
+
+.exitButton:hover {
+   background-image: url(../../images/icon-button.png);
+}

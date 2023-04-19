@@ -1,0 +1,26 @@
+.button {
+   font-weight: 500;
+   font-size: 16px;
+   line-height: 24px;
+   letter-spacing: 0.24px;
+   width: 100%;
+   background: #60c2aa;
+   color: #ffffff;
+   border-radius: 12px;
+   border: none;
+   padding: 12px 20px;
+   cursor: pointer;
+}
+.button:hover {
+   background: #3ba189;
+}
+
+.button_disabled {
+   background: rgba(96, 194, 170, 0.3);
+   cursor: default;
+}
+
+.button_disabled:hover {
+   background: rgba(96, 194, 170, 0.3);
+   cursor: default;
+}
