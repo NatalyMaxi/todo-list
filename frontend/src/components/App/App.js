@@ -11,7 +11,7 @@ import * as MainApi from '../../utils/MainApi';
 
 function App() {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(false); //временно
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isAddTaskPopupOpen, setIsAddTaskPopupOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
@@ -19,12 +19,10 @@ function App() {
   const [employees, setEmployees] = useState([]);
   const [userId, setEUserId] = useState(JSON.parse(localStorage.getItem('user_id')) || {});
 
-
   useEffect(() => {
     handleTokenCheck();
     // eslint-disable-next-line
   }, []);
-
   const handleAddTaskClick = () => {
     setIsAddTaskPopupOpen(true)
     handleGetEmployee(userId)
@@ -38,8 +36,9 @@ function App() {
   const handleAddTaskSubmit = (data) => {
     const jwt = localStorage.getItem('jwt');
     MainApi
-      .addNewTask(data, jwt)
+      .addNewTask(data, userId, jwt)
       .then((newTask) => {
+        console.log(newTask)
         setTasks([newTask, ...tasks]);
         closeAllPopups();
       })
@@ -139,7 +138,6 @@ function App() {
     setLoggedIn(false);
     setCurrentUser({});
   }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>

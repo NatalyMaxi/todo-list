@@ -8,6 +8,7 @@ import Button from '../Button/Button';
 import SortingElement from '../SortingElement/SortingElement';
 
 const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut }) => {
+   
    return (
       <>
          <Header loggedIn={loggedIn} onSignOut={onSignOut} />
@@ -36,16 +37,17 @@ const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut }) => {
                   {
                      tasks.map((task) => {
                         return <Task
-                           key={task.id}
+                           key={task.task_id}
                            heading={task.heading}
                            description={task.description}
-                           director={task.director}
-                           responsible={task.responsible}
+                           director={`${task.dir.name} ${task.dir.patronymic} ${task.dir.surname}`}
+                           employee={`${task.emp.name} ${task.emp.patronymic} ${task.emp.surname}`}
                            priority={task.priority}
                            status={task.status}
                            dateCreation={task.dateCreation}
                            dateUpdate={task.dateUpdate}
                            deadline={task.deadline}
+                           onClick={onAddTask}
                         />
                      })
                   }

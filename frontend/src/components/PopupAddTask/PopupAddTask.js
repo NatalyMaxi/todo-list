@@ -1,50 +1,19 @@
-import React, { useState } from 'react';
 import Popup from '../Popup/Popup';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
 import Title from '../Title/Title';
 import Select from '../Select/Select';
 import SelectionElement from '../SelectionElement/SelectionElement';
+import useForm from '../../hooks/useForm'
 
-const PopupAddTask = ({ isOpen, onClose, onAddTask }) => {
-   const [headingTask, setHeadingTask] = useState('');
-   const [descriptionTask, setDescriptionTask] = useState('');
-   const [deadlineTask, setDeadlineTask] = useState('');
-   const [priorityTask, setPriorityTask] = useState('default');
-   const [responsibleForTask, setResponsibleForTask] = useState('default');
-   const [taskStatus, setTaskStatus] = useState('default');
-
-   const handleChangeTitle = (evt) => {
-      setHeadingTask(evt.target.value)
-   }
-   const handleChangeDescription = (evt) => {
-      setDescriptionTask(evt.target.value)
-   }
-   const handleChangeEndDate = (evt) => {
-      setDeadlineTask(evt.target.value)
-   }
-   const handleChangePriority = (evt) => {
-      setPriorityTask(evt.target.value)
-   }
-   const handleChangeResponsible = (evt) => {
-      setResponsibleForTask(evt.target.value)
-   }
-   const handleChangeStatus = (evt) => {
-      setTaskStatus(evt.target.value)
-   }
+const PopupAddTask = ({ isOpen, onClose, onAddTask, employees, errorMessage }) => {
+   const { values, handleChange, resetForm, errors, isValid } = useForm();
 
    const handleSubmit = (evt) => {
       evt.preventDefault()
-      onAddTask({
-         heading: headingTask,
-         description: descriptionTask,
-         deadline: deadlineTask,
-         priority: priorityTask,
-         responsible: responsibleForTask,
-         status: taskStatus
-      })
+      onAddTask(values,)
+      resetForm()
    }
-
    return (
       <Popup
          isOpen={isOpen}
@@ -54,98 +23,111 @@ const PopupAddTask = ({ isOpen, onClose, onAddTask }) => {
          <Form
             name='add-task'
             text='Добавить'
-            disabled='disabled'//временно
             onSubmit={handleSubmit}
+            disabled={!isValid}
+            errorMessage={errorMessage}
          >
             <Input
-               id='title'
-               name='title'
+               name='heading'
                placeholder='Заголовок задачи'
                type='text'
                required
                autoComplete='off'
-               value={headingTask}
-               onChange={handleChangeTitle}
+               onChange={handleChange}
+               value={values.heading || ''}
+               error={errors.heading || ''}
             />
             <Input
-               id='description'
                name='description'
                placeholder='Описание задачи'
                type='text'
                required
                autoComplete='off'
-               value={descriptionTask}
-               onChange={handleChangeDescription}
+               onChange={handleChange}
+               value={values.description || ''}
+               error={errors.description || ''}
             />
             <Input
-               id='end-date'
-               name='end-date'
+               name='deadline'
                placeholder='Дата окончания'
-               type='text'
+               type="date"
                required
                autoComplete='off'
-               value={deadlineTask}
-               onChange={handleChangeEndDate}
+               onChange={handleChange}
+               value={values.deadline || ''}
+               error={errors.deadline || ''}
             />
             <Select
-               value={responsibleForTask}
-               onChange={handleChangeResponsible}
+               name='employee'
+               onChange={handleChange}
+               value={values.employees}
             >
                <SelectionElement
                   selectionText='ФИО ответственного'
                   value='default'
                   disabled
                />
-
+               {
+                  employees.map((employee) => {
+                     return <SelectionElement
+                        key={employee.user_id}
+                        selectionText={`${employee.name} ${employee.patronymic} ${employee.surname}`}
+                        value={`${employee.user_id}`}
+                     />
+                  })
+               }
             </Select>
             <Select
-               value={priorityTask}
-               onChange={handleChangePriority}
+               name='priority'
+               value={values.priority}
+               onChange={handleChange}
             >
                <SelectionElement
                   selectionText='Приоритет'
-                  value='default'
+                  // value='default'
                   disabled
                />
                <SelectionElement
                   selectionText='Высокий'
-                  value='high'
+                  value='Высокий'
                />
                <SelectionElement
                   selectionText='Средний'
-                  value='medium'
+                  value='Средний'
                />
                <SelectionElement
                   selectionText='Низкий'
-                  value='low'
+                  value='Низкий'
                />
             </Select>
             <Select
-               value={taskStatus}
-               onChange={handleChangeStatus}
+               name='status'
+               value={values.status}
+               onChange={handleChange}
             >
                <SelectionElement
                   selectionText='Статус'
-                  value='default'
+                  // value='default'
                   disabled
                />
                <SelectionElement
                   selectionText='К выполнению'
-                  value='started'
+                  value='К выполнению'
                />
                <SelectionElement
                   selectionText='Выполняется'
-                  value='in-progress'
+                  value='iВыполняется'
                />
                <SelectionElement
                   selectionText='Выполнена'
-                  value='completed'
+                  value='Выполнена'
                />
                <SelectionElement
                   selectionText='Отменена'
-                  value='cancelled'
+                  value='Отменена'
                />
             </Select>
+
          </Form>
       </Popup>
    )

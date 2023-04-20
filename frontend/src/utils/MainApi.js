@@ -34,7 +34,7 @@ export const getAllTask = (jwt) => {
 };
 
 //Dобавим новую задачу
-export const addNewTask = (data, jwt) => {
+export const addNewTask = (data, id, jwt) => {
    return fetch(`${BASE_URL}/tasks`, {
       method: 'POST',
       headers: {
@@ -44,12 +44,12 @@ export const addNewTask = (data, jwt) => {
       body: JSON.stringify({
          heading: data.heading,
          description: data.description,
-         director: data.director,
+         director: id,
          employee: data.employee,
          priority: data.priority,
          status: data.status,
-         dateCreation: data.dateCreation,
-         dateUpdate: data.dateUpdate,
+         dateCreation: new Date(),
+         dateUpdate: new Date(),
          deadline: data.deadline,
       }),
    })
@@ -87,3 +87,5 @@ export const getEmployee = (jwt, userId) => {
       }
    }).then((res) => checkResponse(res))
 };
+
+

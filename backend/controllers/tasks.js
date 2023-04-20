@@ -38,8 +38,16 @@ module.exports.createTask = async (req, res, next) => {
          deadline,
          director,
          employee
-      });
-      res.send(task);
+      },
+         {
+            include: { all: true },
+         }
+      );
+      const result = await Task.findOne({
+         include: { all: true },
+         where: { task_id: task.task_id },
+      })
+      res.send(result);
    } catch (err) {
       if (err.name === 'ValidationError') {
          next(new CastError('Переданы некорректные данные'));
@@ -66,20 +74,20 @@ module.exports.updateTask = async (req, res, next) => {
    //const director = req.user.user_id;
    console.log(director,
       heading, description, priority, status, dateCreation, dateUpdate, deadline, employee,
-      )
+   )
    try {
       const task = await Task.update(
          {
-               heading,
-               description,
-               priority,
-               status,
-               dateCreation,
-               dateUpdate,
-               deadline,
-               director,
-               employee,
-               task_id
+            heading,
+            description,
+            priority,
+            status,
+            dateCreation,
+            dateUpdate,
+            deadline,
+            director,
+            employee,
+            task_id
          },
          {
             where: {

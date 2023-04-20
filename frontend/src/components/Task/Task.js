@@ -7,7 +7,7 @@ const Task = ({
    heading,
    description,
    director,
-   responsible,
+   employee,
    priority,
    status,
    dateCreation,
@@ -15,7 +15,7 @@ const Task = ({
    deadline,
    onClick
 }) => {
-   const todayDay = format(new Date(), 'd.MM.yyyy');
+   const todayDay = format(new Date(), 'dd.MM.yyyy');
    const deadlineTask = deadline === todayDay ? true : false;
    const completed = status === 'Выполнен' ? true : false;
 
@@ -35,7 +35,7 @@ const Task = ({
             </p>
             <p className={classes.taskTitle}>{description}</p>
             <p className={classes.taskTitle}>{director}</p>
-            <p className={classes.taskTitle}>{responsible}</p>
+            <p className={classes.taskTitle}>{employee}</p>
             <p className={classes.taskTitle}>{priority}</p>
             <p className={classes.taskTitle}>{status}</p>
             <p className={classes.taskTitle}>{dateCreation}</p>
