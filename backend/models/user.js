@@ -42,7 +42,7 @@ User.init({
       maxlength: 30,
    },
    role: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
       allowNull: false,
       minlength: 2,
       maxlength: 30,
