@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
 import classes from './SortingElement.module.css';
 
-const SortingElement = () => {
-   const [sortTasks, setSortTasks] = useState('default');
-
-   const handleChangeSortTasks = (evt) => {
-      setSortTasks(evt.target.value)
-   }
+const SortingElement = ({ role, onFilter, sortTasks }) => {
 
    return (
       <select
          className={classes.sort}
          value={sortTasks}
-         onChange={handleChangeSortTasks}
+         onChange={onFilter}
       >
          <option
             className={classes.sort__item}
@@ -20,10 +14,15 @@ const SortingElement = () => {
             value='default'>
             Сортировать
          </option>
-         <option value='today' data-sort='date:today'>На сегодня</option>
-         <option value='week' data-sort='date:week'>На неделю</option>
-         <option value='long-time' data-sort='date:long-time'>Более недели</option>
-         <option value='responsible' data-sort='sort:responsible'>По ответственным</option>
+         <option value='forToday'>На сегодня</option>
+         <option value='forWeek'>На неделю</option>
+         <option value='moreThanWeek'>Более недели</option>
+         <option value='withoutSorting'>Без сортировки</option>
+         <option
+            value='responsible'
+            disabled={role ? false : true}>
+            По ответственным
+         </option>
       </select>
    )
 }

@@ -7,7 +7,7 @@ import Grid from '../Grid/Grid';
 import Button from '../Button/Button';
 import SortingElement from '../SortingElement/SortingElement';
 
-const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut }) => {
+const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut, onFilter, sortTasks, role, }) => {
    
    return (
       <>
@@ -15,11 +15,15 @@ const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut }) => {
          <section className={classes.taskList}>
             <div className={classes.taskList__content}>
                <div className={classes.taskList__wrapper}>
-                  <SortingElement />
+                  <SortingElement
+                     onFilter={onFilter}
+                     sortTasks={sortTasks}
+                     role={role}/>
                   <Button
                      type='button'
                      text='Новая задача'
                      onClick={onAddTask}
+                     role={role}
                   />
                </div>
                <div className={classes.taskList__grid}>

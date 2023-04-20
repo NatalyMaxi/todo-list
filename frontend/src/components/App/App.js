@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { format, isAfter } from 'date-fns';
 import './App.css';
 import Authorization from '../Authorization/Authorization';
 import PopupAddTask from '../PopupAddTask/PopupAddTask';
@@ -18,11 +19,49 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [userId, setEUserId] = useState(JSON.parse(localStorage.getItem('user_id')) || {});
+  const [role, setRole] = useState(JSON.parse(localStorage.getItem('role')) || false)
+   const [filteredTasks, setFilteredTasks] = useState(tasks)
+  const [sortTasks, setSortTasks] = useState('default');
 
   useEffect(() => {
     handleTokenCheck();
     // eslint-disable-next-line
   }, []);
+
+  const forToday = tasks.filter((i) => {
+    const todayDay = format(new Date(), 'yyy-MM-dd');
+    return i.deadline === todayDay
+  })
+
+  const forWeek = tasks.filter((i) => {
+    const day = format(new Date(new Date(new Date().setDate(new Date().getDate() + 7))), 'yyy-MM-dd');
+    const result = isAfter(new Date(i.deadline), new Date(day))
+    return !result
+  })
+
+  const moreThanWeek = tasks.filter((i) => {
+    const day = format(new Date(new Date(new Date().setDate(new Date().getDate() + 7))), 'yyy-MM-dd');
+    const result = isAfter(new Date(i.deadline), new Date(day))
+    return result
+  })
+
+  // const withoutSorting = tasks.filter((i) => {
+  //   return i
+  // })
+
+  const handleChangeSortTasks = (evt) => {
+    setSortTasks(evt.target.value)
+    const value = evt.target.value;
+    switch (value) {
+      case 'forToday': { setTasks(forToday) } break;
+      case 'forWeek': { setTasks(forWeek) } break;
+      case 'moreThanWeek': { setTasks(moreThanWeek) } break;
+      // case 'withoutSorting': { setTasks(withoutSorting) } break;
+      default: { setTasks(tasks) }
+    }
+  }
+
+
   const handleAddTaskClick = () => {
     setIsAddTaskPopupOpen(true)
     handleGetEmployee(userId)
@@ -100,7 +139,9 @@ function App() {
           setLoggedIn(true);
           localStorage.setItem('jwt', res.token);
           localStorage.setItem('user_id', res.user_id);
+          localStorage.setItem('role', res.role);
           setEUserId(res.user_id)
+          setRole(res.role)
           handleTokenCheck()
         }
       })
@@ -151,6 +192,9 @@ function App() {
                 onUpdateTask={handleAddTaskClick}
                 tasks={tasks}
                 userId={userId}
+                onFilter={handleChangeSortTasks}
+                sortTasks={sortTasks}
+                role={role}
               ></TaskList>
             </ProtectedRoute>
           }

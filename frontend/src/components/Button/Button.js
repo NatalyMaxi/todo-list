@@ -1,14 +1,16 @@
 import React from 'react';
 import classes from './Button.module.css';
 
-const Button = ({ text, disabled, onClick }) => {
+const Button = ({ text, onClick, role }) => {
+
    return (
       <button
-         className={disabled ?
-            `${classes.button} ${classes.button_disabled}`
+         className={role ?
+            `${classes.button}`
             :
-            `${classes.button}`}
+            `${classes.button} ${classes.button_disabled}`}
          onClick={onClick}
+         disabled={role ? false : true}
       >
          {text}
       </button>
