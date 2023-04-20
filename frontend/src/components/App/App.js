@@ -19,48 +19,57 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [userId, setEUserId] = useState(JSON.parse(localStorage.getItem('user_id')) || {});
-  const [role, setRole] = useState(JSON.parse(localStorage.getItem('role')) || false)
-   const [filteredTasks, setFilteredTasks] = useState(tasks)
+  const [role, setRole] = useState('')
+  const [filteredTasks, setFilteredTasks] = useState(tasks)
   const [sortTasks, setSortTasks] = useState('default');
-
   useEffect(() => {
     handleTokenCheck();
     // eslint-disable-next-line
   }, []);
 
-  const forToday = tasks.filter((i) => {
-    const todayDay = format(new Date(), 'yyy-MM-dd');
-    return i.deadline === todayDay
-  })
+  useEffect(() => {
+    if (sortTasks === 'default') {
+      return setFilteredTasks(tasks.filter((i) => {
+        return i
+      }))
+    }
+    if (sortTasks === 'forToday') {
+      return setFilteredTasks(tasks.filter((i) => {
+        const todayDay = format(new Date(), 'yyy-MM-dd');
+        return i.deadline === todayDay
+      }))
+    }
+    if (sortTasks === 'forWeek') {
+      return setFilteredTasks(tasks.filter((i) => {
+        const day = format(new Date(new Date(new Date().setDate(new Date().getDate() + 7))), 'yyy-MM-dd');
+        const result = isAfter(new Date(i.deadline), new Date(day))
+        return !result
+      }))
+    }
+    if (sortTasks === 'moreThanWeek') {
+      return setFilteredTasks(tasks.filter((i) => {
+        const day = format(new Date(new Date(new Date().setDate(new Date().getDate() + 7))), 'yyy-MM-dd');
+        const result = isAfter(new Date(i.deadline), new Date(day))
+        return result
+      }))
+    }
+    if (sortTasks === 'byResponsible') {
+      return setFilteredTasks(tasks.filter((i) => {
+        return i.director === userId
+      }))
+    }
+    if (sortTasks === 'withoutSorting') {
+      return setFilteredTasks(tasks.filter((i) => {
+        return i
+      }))
+    }
 
-  const forWeek = tasks.filter((i) => {
-    const day = format(new Date(new Date(new Date().setDate(new Date().getDate() + 7))), 'yyy-MM-dd');
-    const result = isAfter(new Date(i.deadline), new Date(day))
-    return !result
-  })
-
-  const moreThanWeek = tasks.filter((i) => {
-    const day = format(new Date(new Date(new Date().setDate(new Date().getDate() + 7))), 'yyy-MM-dd');
-    const result = isAfter(new Date(i.deadline), new Date(day))
-    return result
-  })
-
-  // const withoutSorting = tasks.filter((i) => {
-  //   return i
-  // })
+  },[sortTasks, tasks])
 
   const handleChangeSortTasks = (evt) => {
     setSortTasks(evt.target.value)
-    const value = evt.target.value;
-    switch (value) {
-      case 'forToday': { setTasks(forToday) } break;
-      case 'forWeek': { setTasks(forWeek) } break;
-      case 'moreThanWeek': { setTasks(moreThanWeek) } break;
-      // case 'withoutSorting': { setTasks(withoutSorting) } break;
-      default: { setTasks(tasks) }
     }
-  }
-
+  
 
   const handleAddTaskClick = () => {
     setIsAddTaskPopupOpen(true)
@@ -123,6 +132,7 @@ function App() {
     MainApi
       .getAllTask(jwt)
       .then((res) => {
+        console.log(res.data)
         setLoggedIn(true);
         setTasks(res.data)
       })
@@ -139,7 +149,6 @@ function App() {
           setLoggedIn(true);
           localStorage.setItem('jwt', res.token);
           localStorage.setItem('user_id', res.user_id);
-          localStorage.setItem('role', res.role);
           setEUserId(res.user_id)
           setRole(res.role)
           handleTokenCheck()
@@ -178,6 +187,10 @@ function App() {
     navigate('/signin');
     setLoggedIn(false);
     setCurrentUser({});
+    setTasks([]);
+    setSortTasks('default');
+    setFilteredTasks()
+    
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -190,7 +203,7 @@ function App() {
                 onAddTask={handleAddTaskClick}
                 onSignOut={onSignOut}
                 onUpdateTask={handleAddTaskClick}
-                tasks={tasks}
+                tasks={filteredTasks}
                 userId={userId}
                 onFilter={handleChangeSortTasks}
                 sortTasks={sortTasks}

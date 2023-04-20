@@ -15,7 +15,7 @@ const Task = ({
    deadline,
    onClick
 }) => {
-   const todayDay = format(new Date(), 'dd.MM.yyyy');
+   const todayDay = format(new Date(), 'yyyy-MM-dd');
    const deadlineTask = deadline === todayDay ? true : false;
    const completed = status === 'Выполнен' ? true : false;
 
