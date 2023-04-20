@@ -1,11 +1,13 @@
 import React from 'react';
 import classes from './ExitButton.module.css';
 
-const ExitButton = () => {
+const ExitButton = ({ onClick }) => {
    return (
       <button
          className={classes.exitButton}
-         type='button'>
+         type='button'
+         onClick={onClick}
+      >
       </button>
    )
 }

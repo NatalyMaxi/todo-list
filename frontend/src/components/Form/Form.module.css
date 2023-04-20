@@ -12,6 +12,6 @@
    width: 352px;
 }
 
-.form__wrapper {
-   padding-top: 30px;
+.form__error {
+   height: 20px;
 }

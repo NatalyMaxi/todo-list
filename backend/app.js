@@ -1,5 +1,6 @@
 require('dotenv').config(); // Dotenv — это модуль с нулевой зависимостью, который загружает переменные среды из .envфайла в файлы process.env.
 const express = require('express');
+const cors = require('cors');
 const helmet = require('helmet'); // помогает защитить приложение от некоторых широко известных веб-уязвимостей путем соответствующей настройки заголовков HTTP
 const bodyParser = require('body-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');

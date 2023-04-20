@@ -3,15 +3,14 @@ import Header from '../Header/Header';
 import Subtitle from '../Subtitle/Subtitle';
 import Task from '../Task/Task'
 import classes from './TaskList.module.css';
-import { tasks } from '../../utils/constants';
 import Grid from '../Grid/Grid';
 import Button from '../Button/Button';
 import SortingElement from '../SortingElement/SortingElement';
 
-const TaskList = ({ onAddTask }) => {
+const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut }) => {
    return (
       <>
-         <Header />
+         <Header loggedIn={loggedIn} onSignOut={onSignOut} />
          <section className={classes.taskList}>
             <div className={classes.taskList__content}>
                <div className={classes.taskList__wrapper}>
@@ -19,7 +18,6 @@ const TaskList = ({ onAddTask }) => {
                   <Button
                      type='button'
                      text='Новая задача'
-                     //disabled='true'
                      onClick={onAddTask}
                   />
                </div>

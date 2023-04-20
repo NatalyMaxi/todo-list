@@ -3,11 +3,11 @@ import classes from './Header.module.css';
 import Logo from '../Logo/Logo';
 import ExitButton from '../ExitButton/ExitButton';
 
-const Header = () => {
+const Header = ({ onSignOut }) => {
    return (
       <section className={classes.header}>
          <Logo />
-         <ExitButton />
+         <ExitButton onClick={onSignOut} />
       </section>
    )
 }
