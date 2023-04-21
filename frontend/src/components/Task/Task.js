@@ -15,8 +15,8 @@ const Task = ({
   deadline,
   onClick
 }) => {
-  const todayDay = format(new Date(), 'yyyy-MM-dd');
-  const deadlineTask = deadline === todayDay ? true : false;
+  const todayDay = format(new Date(), 'dd.MM.yyyy');
+  const deadlineTask = format(new Date(deadline), 'dd.MM.yyyy') === todayDay ? true : false;
   const completed = status === 'Выполнен' ? true : false;
 
   return (
@@ -38,9 +38,9 @@ const Task = ({
         <p className={classes.taskTitle}>{employee}</p>
         <p className={classes.taskTitle}>{priority}</p>
         <p className={classes.taskTitle}>{status}</p>
-        <p className={classes.taskTitle}>{format(new Date(dateCreation), 'yyyy-MM-dd')}</p>
-        <p className={classes.taskTitle}>{format(new Date(dateUpdate), 'yyyy-MM-dd')}</p>
-        <p className={classes.taskTitle}>{deadline}</p>
+        <p className={classes.taskTitle}>{format(new Date(dateCreation), 'dd.MM.yyyy')}</p>
+        <p className={classes.taskTitle}>{format(new Date(dateUpdate), 'dd.MM.yyyy')}</p>
+        <p className={classes.taskTitle}>{format(new Date(deadline), 'dd.MM.yyyy')}</p>
       </Grid>
     </>
   )
