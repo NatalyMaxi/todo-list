@@ -64,12 +64,11 @@ function App() {
       }))
     }
 
-  },[sortTasks, tasks])
+  }, [sortTasks, tasks])
 
   const handleChangeSortTasks = (evt) => {
     setSortTasks(evt.target.value)
-    }
-  
+  }
 
   const handleAddTaskClick = () => {
     setIsAddTaskPopupOpen(true)
@@ -190,7 +189,7 @@ function App() {
     setTasks([]);
     setSortTasks('default');
     setFilteredTasks()
-    
+
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>

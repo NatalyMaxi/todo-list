@@ -5,7 +5,6 @@ import classes from './Authorization.module.css';
 import useForm from '../../hooks/useForm';
 
 const Authorization = ({ onLogin, errorMessage }) => {
-
    const { values, handleChange, resetForm, errors, isValid } = useForm();
 
    const handleSubmit = (evt) => {

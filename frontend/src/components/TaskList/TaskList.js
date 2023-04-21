@@ -8,7 +8,7 @@ import Button from '../Button/Button';
 import SortingElement from '../SortingElement/SortingElement';
 
 const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut, onFilter, sortTasks, role, }) => {
-   
+
    return (
       <>
          <Header loggedIn={loggedIn} onSignOut={onSignOut} />
@@ -18,7 +18,7 @@ const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut, onFilter, sortTasks, 
                   <SortingElement
                      onFilter={onFilter}
                      sortTasks={sortTasks}
-                     role={role}/>
+                     role={role} />
                   <Button
                      type='button'
                      text='Новая задача'
