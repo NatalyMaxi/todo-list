@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 const { where } = require('sequelize');
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
-const Subordination = require('../models/subordination')
+const Subordination = require('../models/subordination');
+const AuthorizationError = require('../Error/AuthorizationError');
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.login = (req, res, next) => {
@@ -9,10 +11,15 @@ module.exports.login = (req, res, next) => {
    return User.findOne({
       where: {
          email,
-         password
       },
    })
-      .then((user) => {
+      .then(async (user) => {
+         const isPasswordValid = await bcrypt.compare(password, user.password);
+
+         if (!isPasswordValid) {
+            throw new AuthorizationError('Неверный логин или пароль')
+         }
+
          const token = jwt.sign(
             { user_id: user.user_id },
             NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
@@ -53,7 +60,7 @@ module.exports.getEmployee = (req, res, next) => {
          director: userId,
       }
    }).then((users) => {
-      res.send({ data: users.map(u=>u.emp) });
+      res.send({ data: users.map(u => u.emp) });
    })
       .catch((err) => {
          console.log(err);
