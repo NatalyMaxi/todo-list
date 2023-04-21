@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { format, isAfter } from 'date-fns';
 import './App.css';
 import Authorization from '../Authorization/Authorization';
@@ -63,7 +64,7 @@ function App() {
         return i
       }))
     }
-
+    // eslint-disable-next-line
   }, [sortTasks, tasks])
 
   const handleChangeSortTasks = (evt) => {
@@ -217,6 +218,10 @@ function App() {
             errorMessage={errorMessage}
             onLogin={handleAuthorization}
           />}
+        />
+        <Route
+          path='/'
+          element={<Navigate to='/tasks' replace />}
         />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
