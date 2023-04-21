@@ -1,6 +1,6 @@
 const Task = require('../models/task');
 const CastError = require('../Error/CastError');
-const User = require('../models/user');
+
 // GET получить все задачи
 module.exports.getTasks = (req, res, next) => {
   Task.findAll(
@@ -58,7 +58,6 @@ module.exports.createTask = async (req, res, next) => {
 };
 //PATCH обновляем задачу
 module.exports.updateTask = async (req, res, next) => {
-  console.log('222')
   const {
     heading,
     description,
@@ -72,9 +71,6 @@ module.exports.updateTask = async (req, res, next) => {
     task_id
   } = req.body;
   //const director = req.user.user_id;
-  console.log(director,
-    heading, description, priority, status, dateCreation, dateUpdate, deadline, employee,
-  )
   try {
     const task = await Task.update(
       {
@@ -104,3 +100,4 @@ module.exports.updateTask = async (req, res, next) => {
     }
   }
 };
+

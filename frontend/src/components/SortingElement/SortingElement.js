@@ -1,7 +1,6 @@
 import classes from './SortingElement.module.css';
 
 const SortingElement = ({ role, onFilter, sortTasks }) => {
-  console.log(sortTasks)
   return (
     <select
       className={classes.sort}

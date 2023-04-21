@@ -63,7 +63,6 @@ module.exports.getEmployee = (req, res, next) => {
     res.send({ data: users.map(u => u.emp) });
   })
     .catch((err) => {
-      console.log(err);
       next(err)
     });
 };

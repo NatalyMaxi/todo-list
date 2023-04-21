@@ -115,7 +115,6 @@ function App() {
     MainApi
       .getAllTask(jwt)
       .then((res) => {
-        console.log(res.data)
         setLoggedIn(true);
         setTasks(res.data)
       })
