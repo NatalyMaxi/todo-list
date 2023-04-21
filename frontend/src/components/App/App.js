@@ -20,8 +20,8 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [userId, setEUserId] = useState(JSON.parse(localStorage.getItem('user_id')) || {});
-  const [role, setRole] = useState('')
-  const [filteredTasks, setFilteredTasks] = useState(tasks)
+  const [role, setRole] = useState(JSON.parse(localStorage.getItem('role')) || {});
+  const [filteredTasks, setFilteredTasks] = useState(tasks);
   const [sortTasks, setSortTasks] = useState('default');
   useEffect(() => {
     handleTokenCheck();
@@ -129,11 +129,12 @@ function App() {
       .authorize({ email, password })
       .then((res) => {
         if (res.token) {
+          localStorage.setItem('jwt', res.token);
+          localStorage.setItem('user_id', res.user_id);
+          localStorage.setItem('role', res.role);
           setLoggedIn(true);
           setEUserId(res.user_id)
           setRole(res.role)
-          localStorage.setItem('jwt', res.token);
-          localStorage.setItem('user_id', res.user_id);
           handleTokenCheck()
         }
       })
