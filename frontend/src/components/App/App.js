@@ -51,14 +51,6 @@ function App() {
 
   const handleChangeSortTasks = (evt) => {
     setSortTasks(evt.target.value)
-    const value = evt.target.value;
-    switch (value) {
-      case 'forToday': { setTasks(forToday) } break;
-      case 'forWeek': { setTasks(forWeek) } break;
-      case 'moreThanWeek': { setTasks(moreThanWeek) } break;
-      // case 'withoutSorting': { setTasks(withoutSorting) } break;
-      default: { setTasks(tasks) }
-    }
   }
 
 
