@@ -1,17 +1,17 @@
 .form {
-   display: flex;
-   flex-direction: column;
-   gap: 20px;
-   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
 }
 
 .form__container {
-   display: flex;
-   flex-direction: column;
-   gap: 12px;
-   width: 352px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 352px;
 }
 
 .form__error {
-   height: 20px;
+  height: 20px;
 }

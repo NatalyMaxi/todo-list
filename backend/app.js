@@ -22,8 +22,8 @@ app.use(requestLogger); // подключаем логгер запросов
 app.use(routes); // подключаем роуты
 
 app.use(errorLogger); // подключаем логгер ошибок
-app.use(errorHandler); 
+app.use(errorHandler);
 
 app.listen(PORT, () => {
-   console.log(`Сервер запущен на ${PORT} порту`);
+  console.log(`Сервер запущен на ${PORT} порту`);
 });

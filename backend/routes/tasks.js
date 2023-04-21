@@ -2,9 +2,9 @@ const router = require('express').Router();
 const { validationCreateTask, validationUpdateTask } = require('../middlewares/validations');
 
 const {
-   getTasks,
-   createTask,
-   updateTask
+  getTasks,
+  createTask,
+  updateTask
 } = require('../controllers/tasks');
 
 router.get('/', getTasks);

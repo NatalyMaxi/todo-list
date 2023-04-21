@@ -1,8 +1,8 @@
 const routes = require('express').Router();
 
 const {
-   getUsers,
-   getEmployee
+  getUsers,
+  getEmployee
 } = require('../controllers/users');
 
 routes.get('/', getUsers);

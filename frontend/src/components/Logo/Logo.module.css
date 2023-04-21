@@ -1,7 +1,7 @@
 .logo {
-   width: 100px;
+  width: 100px;
 }
 
 .logo__image {
-   object-fit: cover;
+  object-fit: cover;
 }

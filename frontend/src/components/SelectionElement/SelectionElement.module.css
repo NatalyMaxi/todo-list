@@ -1,10 +1,10 @@
 .option {
-   font-weight: 400;
-   font-size: 16px;
-   line-height: 24px;
-   color: #373745;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #373745;
 }
 
 .option_disabled {
-   color: #b1b1b7;
+  color: #b1b1b7;
 }
