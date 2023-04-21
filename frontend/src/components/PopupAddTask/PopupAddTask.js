@@ -7,11 +7,12 @@ import SelectionElement from '../SelectionElement/SelectionElement';
 import useForm from '../../hooks/useForm'
 
 const PopupAddTask = ({ isOpen, onClose, onAddTask, employees, errorMessage }) => {
-  const { values, handleChange, errors, isValid } = useForm();
+  const { values, handleChange, resetForm, errors, isValid } = useForm();
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
     onAddTask(values)
+    resetForm()
   }
   return (
     <Popup

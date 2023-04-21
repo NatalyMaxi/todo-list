@@ -14,12 +14,13 @@ module.exports.login = (req, res, next) => {
     },
   })
     .then(async (user) => {
+      if (!user) {
+        throw new AuthorizationError('Неверный логин или пароль')
+      }
       const isPasswordValid = await bcrypt.compare(password, user.password);
-
       if (!isPasswordValid) {
         throw new AuthorizationError('Неверный логин или пароль')
       }
-
       const token = jwt.sign(
         { user_id: user.user_id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
