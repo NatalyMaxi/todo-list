@@ -7,12 +7,11 @@ import SelectionElement from '../SelectionElement/SelectionElement';
 import useForm from '../../hooks/useForm'
 
 const PopupAddTask = ({ isOpen, onClose, onAddTask, employees, errorMessage }) => {
-  const { values, handleChange, resetForm, errors, isValid } = useForm();
+  const { values, handleChange, errors, isValid } = useForm();
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    onAddTask(values,)
-    resetForm()
+    onAddTask(values)
   }
   return (
     <Popup
@@ -64,8 +63,9 @@ const PopupAddTask = ({ isOpen, onClose, onAddTask, employees, errorMessage }) =
         >
           <SelectionElement
             selectionText='ФИО ответственного'
-            value='default'
+            value=''
             disabled
+            required
           />
           {
             employees.map((employee) => {
@@ -81,6 +81,7 @@ const PopupAddTask = ({ isOpen, onClose, onAddTask, employees, errorMessage }) =
           name='priority'
           value={values.priority}
           onChange={handleChange}
+          required
         >
           <SelectionElement
             selectionText='Приоритет'
@@ -104,6 +105,7 @@ const PopupAddTask = ({ isOpen, onClose, onAddTask, employees, errorMessage }) =
           name='status'
           value={values.status}
           onChange={handleChange}
+          required
         >
           <SelectionElement
             selectionText='Статус'
@@ -111,12 +113,12 @@ const PopupAddTask = ({ isOpen, onClose, onAddTask, employees, errorMessage }) =
             disabled
           />
           <SelectionElement
-            selectionText='К выполнению'
+            selectionText='В работу'
             value='К выполнению'
           />
           <SelectionElement
             selectionText='Выполняется'
-            value='iВыполняется'
+            value='В работу'
           />
           <SelectionElement
             selectionText='Выполнена'
