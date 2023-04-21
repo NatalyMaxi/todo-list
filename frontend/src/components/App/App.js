@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import { format, isAfter } from 'date-fns';
 import './App.css';
 import Authorization from '../Authorization/Authorization';
 import PopupAddTask from '../PopupAddTask/PopupAddTask';
@@ -10,6 +9,7 @@ import ProtectedRoute from '../ProtectedRoute';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import * as MainApi from '../../utils/MainApi';
+import { forToday, forWeek, moreThanWeek, byResponsible, withoutSorting, start } from '../../utils/constants';
 
 function App() {
   const navigate = useNavigate();
@@ -30,39 +30,22 @@ function App() {
 
   useEffect(() => {
     if (sortTasks === 'default') {
-      return setFilteredTasks(tasks.filter((i) => {
-        return i
-      }))
+      return setFilteredTasks(start(tasks))
     }
     if (sortTasks === 'forToday') {
-      return setFilteredTasks(tasks.filter((i) => {
-        const todayDay = format(new Date(), 'yyy-MM-dd');
-        return i.deadline === todayDay
-      }))
+      return setFilteredTasks(forToday(tasks))
     }
     if (sortTasks === 'forWeek') {
-      return setFilteredTasks(tasks.filter((i) => {
-        const day = format(new Date(new Date(new Date().setDate(new Date().getDate() + 7))), 'yyy-MM-dd');
-        const result = isAfter(new Date(i.deadline), new Date(day))
-        return !result
-      }))
+      return setFilteredTasks(forWeek(tasks))
     }
     if (sortTasks === 'moreThanWeek') {
-      return setFilteredTasks(tasks.filter((i) => {
-        const day = format(new Date(new Date(new Date().setDate(new Date().getDate() + 7))), 'yyy-MM-dd');
-        const result = isAfter(new Date(i.deadline), new Date(day))
-        return result
-      }))
+      return setFilteredTasks(moreThanWeek(tasks))
     }
     if (sortTasks === 'byResponsible') {
-      return setFilteredTasks(tasks.filter((i) => {
-        return i.director === userId
-      }))
+      return setFilteredTasks(byResponsible(tasks, userId))
     }
     if (sortTasks === 'withoutSorting') {
-      return setFilteredTasks(tasks.filter((i) => {
-        return i
-      }))
+      return setFilteredTasks(withoutSorting(tasks))
     }
     // eslint-disable-next-line
   }, [sortTasks, tasks])
@@ -147,10 +130,10 @@ function App() {
       .then((res) => {
         if (res.token) {
           setLoggedIn(true);
-          localStorage.setItem('jwt', res.token);
-          localStorage.setItem('user_id', res.user_id);
           setEUserId(res.user_id)
           setRole(res.role)
+          localStorage.setItem('jwt', res.token);
+          localStorage.setItem('user_id', res.user_id);
           handleTokenCheck()
         }
       })
