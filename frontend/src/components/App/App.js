@@ -69,14 +69,14 @@ function App() {
     MainApi
       .addNewTask(data, userId, jwt)
       .then((newTask) => {
-        console.log(newTask)
         setTasks([newTask, ...tasks]);
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        setErrorMessage(`Все поля должны быть заполнены`);
       })
       .finally(() => {
+        setTimeout(() => setErrorMessage(''), 3000);
       })
   };
 
@@ -90,9 +90,10 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        setErrorMessage(`Заполните все поля`);
       })
       .finally(() => {
+        setTimeout(() => setErrorMessage(''), 3000);
       })
   };
 
