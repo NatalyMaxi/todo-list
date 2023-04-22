@@ -30,13 +30,13 @@ const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut, onFilter, sortTasks, 
             <Grid >
               <Subtitle subtitle='Заголовок задачи' />
               <Subtitle subtitle='Описание' />
-              <Subtitle subtitle='Дата добавления' />
+              <Subtitle subtitle='Добавлена' />
               <Subtitle subtitle='Руководитель' />
               <Subtitle subtitle='Исполнитель' />
               <Subtitle subtitle='Дедлайн' />
               <Subtitle subtitle='Приоритет' />
               <Subtitle subtitle='Статус' />
-              <Subtitle subtitle='Дата обновления' />
+              <Subtitle subtitle='Обновлена' />
 
             </Grid>
             {
