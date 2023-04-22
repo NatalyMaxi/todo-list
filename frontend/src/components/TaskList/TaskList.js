@@ -27,16 +27,17 @@ const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut, onFilter, sortTasks, 
             />
           </div>
           <div className={classes.taskList__grid}>
-            <Grid>
+            <Grid >
               <Subtitle subtitle='Заголовок задачи' />
               <Subtitle subtitle='Описание' />
+              <Subtitle subtitle='Дата добавления' />
               <Subtitle subtitle='Руководитель' />
               <Subtitle subtitle='Исполнитель' />
+              <Subtitle subtitle='Дедлайн' />
               <Subtitle subtitle='Приоритет' />
               <Subtitle subtitle='Статус' />
-              <Subtitle subtitle='Дата добавления' />
               <Subtitle subtitle='Дата обновления' />
-              <Subtitle subtitle='Дата исполнения' />
+
             </Grid>
             {
               tasks.map((task) => {
@@ -44,8 +45,8 @@ const TaskList = ({ onAddTask, loggedIn, tasks, onSignOut, onFilter, sortTasks, 
                   key={task.task_id}
                   heading={task.heading}
                   description={task.description}
-                  director={`${task.dir.name} ${task.dir.patronymic} ${task.dir.surname}`}
-                  employee={`${task.emp.name} ${task.emp.patronymic} ${task.emp.surname}`}
+                  director={`${task.dir.name[0]}.${task.dir.patronymic[0]}. ${task.dir.surname}`}
+                  employee={`${task.emp.name[0]}.${task.emp.patronymic[0]}. ${task.emp.surname}`}
                   priority={task.priority}
                   status={task.status}
                   dateCreation={task.dateCreation}

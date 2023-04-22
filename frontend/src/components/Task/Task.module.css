@@ -1,22 +1,15 @@
 .taskTitle {
-   text-align: start;
-   font-weight: 400;
-   font-size: 12px;
-   letter-spacing: 0.18px;
-   color: #373745;
-   width: 100%;
-   box-shadow: 2px 0px 0px 0px rgba(44, 57, 121, 0.1);
-   text-overflow: ellipsis;
-   overflow: hidden;
-   padding: 2px;
-   margin: 0;
-   box-sizing: border-box;
-}
-
-.taskTitle_type_completed {
-   text-shadow: 3px 1px 4px #64ddbb, 0 0 1em white, 0 0 0.2em #64ddbb;
-}
-
-.taskTitle_type_current {
-   text-shadow: 3px 1px 4px #ff0000a1, 0 0 1em white, 0 0 0.2em white;
+  text-align: start;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.18px;
+  color: #373745;
+  width: 100%;
+  box-shadow: 2px 0px 0px 0px rgba(44, 57, 121, 0.1);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 2px;
+  margin: 0;
+  box-sizing: border-box;
+  text-transform: capitalize;
 }
