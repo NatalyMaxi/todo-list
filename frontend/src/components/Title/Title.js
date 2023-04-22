@@ -3,9 +3,9 @@ import classes from './Title.module.css';
 
 const Title = (props) => {
   return (
-    <p className={classes.title}>
+    <div className={classes.title}>
       {props.title}
-    </p>
+    </div>
   )
 }
 

@@ -3,9 +3,9 @@ import classes from './Subtitle.module.css';
 
 const Subtitle = (props) => {
   return (
-    <p className={classes.subtitle}>
+    <div className={classes.subtitle}>
       {props.subtitle}
-    </p>
+    </div>
   )
 }
 

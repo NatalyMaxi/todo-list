@@ -22,19 +22,19 @@ const Task = ({
   return (
     <>
       <Grid completed={completed} deadlineTask={deadlineTask}>
-        <p className={classes.taskTitle}
+        <div className={classes.taskTitle}
           onClick={onClick}
         >
           {heading}
-        </p>
-        <p className={classes.taskTitle}>{description}</p>
-        <p className={classes.taskTitle}>{format(new Date(dateCreation), 'dd.MM.yyyy')}</p>
-        <p className={classes.taskTitle}>{director}</p>
-        <p className={classes.taskTitle}>{employee}</p>
-        <p className={classes.taskTitle}>{format(new Date(deadline), 'dd.MM.yyyy')}</p>
-        <p className={classes.taskTitle}>{priority}</p>
-        <p className={classes.taskTitle}>{status}</p>
-        <p className={classes.taskTitle}>{format(new Date(dateUpdate), 'dd.MM.yyyy')}</p>
+        </div>
+        <div className={classes.taskTitle}>{description}</div>
+        <div className={classes.taskTitle}>{format(new Date(dateCreation), 'dd.MM.yyyy')}</div>
+        <div className={classes.taskTitle}>{director}</div>
+        <div className={classes.taskTitle}>{employee}</div>
+        <div className={classes.taskTitle}>{format(new Date(deadline), 'dd.MM.yyyy')}</div>
+        <div className={classes.taskTitle}>{priority}</div>
+        <div className={classes.taskTitle}>{status}</div>
+        <div className={classes.taskTitle}>{format(new Date(dateUpdate), 'dd.MM.yyyy')}</div>
       </Grid>
     </>
   )
