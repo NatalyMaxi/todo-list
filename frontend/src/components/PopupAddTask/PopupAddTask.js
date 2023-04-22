@@ -1,6 +1,7 @@
 import Popup from '../Popup/Popup';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
+import Textarea from '../Textarea/Textarea';
 import Title from '../Title/Title';
 import Select from '../Select/Select';
 import SelectionElement from '../SelectionElement/SelectionElement';
@@ -37,7 +38,7 @@ const PopupAddTask = ({ isOpen, onClose, onAddTask, employees, errorMessage }) =
           value={values.heading || ''}
           error={errors.heading || ''}
         />
-        <Input
+        <Textarea
           name='description'
           placeholder='Описание задачи'
           type='text'
@@ -86,7 +87,7 @@ const PopupAddTask = ({ isOpen, onClose, onAddTask, employees, errorMessage }) =
         >
           <SelectionElement
             selectionText='Приоритет'
-            // value='default'
+            value=''
             disabled
           />
           <SelectionElement
@@ -110,16 +111,16 @@ const PopupAddTask = ({ isOpen, onClose, onAddTask, employees, errorMessage }) =
         >
           <SelectionElement
             selectionText='Статус'
-            // value='default'
+            value=''
             disabled
           />
           <SelectionElement
             selectionText='В работу'
-            value='К выполнению'
+            value='В работу'
           />
           <SelectionElement
             selectionText='Выполняется'
-            value='В работу'
+            value='Выполняется'
           />
           <SelectionElement
             selectionText='Выполнена'
