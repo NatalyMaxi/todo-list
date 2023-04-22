@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.button:focus {
+  outline: none;
+}
+
 .button:hover {
   background: rgba(100, 221, 187, 0.7);
 }

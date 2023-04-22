@@ -93,7 +93,7 @@ function App() {
         setErrorMessage(`Заполните все поля`);
       })
       .finally(() => {
-        setTimeout(() => setErrorMessage(''), 3000);
+        setTimeout(() => setErrorMessage(''), 1500);
       })
   };
 
@@ -149,7 +149,7 @@ function App() {
         setCurrentUser(null);
       })
       .finally(() => {
-        setTimeout(() => setErrorMessage(''), 3000);
+        setTimeout(() => setErrorMessage(''), 1500);
       });
   }
 

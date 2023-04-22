@@ -1,6 +1,8 @@
 import { format, isAfter } from 'date-fns';
 export const BASE_URL = 'http://localhost:3001';
 
+export const escKeyCode = 'Escape';
+
 export const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
