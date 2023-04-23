@@ -9,6 +9,6 @@ const {
 
 router.get('/', getTasks);
 router.post('/', validationCreateTask, createTask);
-router.patch('/task', validationUpdateTask, updateTask);
+router.patch('/:id', validationUpdateTask, updateTask);
 
 module.exports = router;
